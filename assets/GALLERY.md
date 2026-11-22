@@ -1,32 +1,23 @@
-# Selected field evidence — publication-ready photo set
+# Field photo gallery
 
-The author confirmed that the photographed people are themselves and family members and that the images may be used for the portfolio. A set of four web-sized JPEGs with EXIF removed has been prepared separately for upload under `assets/gallery/`. These JPEGs are **not yet stored in the GitHub repository**.
+Four photographs from the November 14, 2026 event and iPhone integration tests are published in [assets/gallery](gallery/). The photographed people approved portfolio use. The selected JPEGs were prepared for web viewing with EXIF metadata removed, and the preparation photo showing a Wi-Fi QR code was excluded.
 
-| Planned filename | Suggested caption | What it shows |
+| Evidence | Photograph | Engineering significance |
 |---|---|---|
-| `event-photo-output.jpg` | Photo captured and composed by the booth (November 14, 2026) | Captured image and custom event text banner |
-| `event-field-use.jpg` | Mirror being used during the live event | Physical deployment and guest interaction |
-| `ios-save-flow.jpg` | iPhone photo-saving workflow | Actual captive-browser UI and save guidance |
-| `ios-print-selection.jpg` | iPhone print-sheet selection | Up to four images selected in one print sheet; not proof of printed output |
+| Mirror in use during the event | [Event operation](gallery/event-field-use.jpg) | Demonstrates physical deployment and guest interaction |
+| Captured, framed result | [Photograph produced by the booth](gallery/event-photo-output.jpg) | Shows the camera-to-composited-image output |
+| iPhone photo-saving UI | [iOS save flow](gallery/ios-save-flow.jpg) | Shows the guest-facing photo viewer in the captive-browser environment |
+| iPhone print-sheet UI | [iOS print selection](gallery/ios-print-selection.jpg) | Shows the selection workflow for up to four photographs on one sheet |
 
-The mirror test photo showing a Wi-Fi join QR was excluded from this selection to avoid publishing access credentials.
+## Gallery
 
-These images support real-world operation, physical integration and UI demonstration. They do not establish exact event uptime or print counts.
-
-## Suggested gallery when photos are uploaded
-
-Once the four images exist under `assets/gallery/`, paste the following into the main README:
-
-```markdown
-## Field deployment and mobile interface
-
-| Event operation | Captured output |
+| Event operation | Output image |
 |:---:|:---:|
-| ![Mirror in use at the event](assets/gallery/event-field-use.jpg) | ![Finished photo with event banner](assets/gallery/event-photo-output.jpg) |
+| ![Guest using the photobooth at the event](gallery/event-field-use.jpg) | ![Finished framed photograph](gallery/event-photo-output.jpg) |
 
-| iPhone photo-saving flow | iPhone print-sheet selection |
+| iPhone save flow | iPhone print selection |
 |:---:|:---:|
-| ![iOS save flow](assets/gallery/ios-save-flow.jpg) | ![iOS print selection](assets/gallery/ios-print-selection.jpg) |
+| ![iPhone photo saving screen](gallery/ios-save-flow.jpg) | ![iPhone print-sheet selection screen](gallery/ios-print-selection.jpg) |
 
-The photographs document a functioning prototype in use, not independently logged uptime or print totals.
-```
+These images are evidence of real-world operation and user-interface rendering. They do not, by themselves, establish exact uptime, total captures, error rates or physically completed print counts. [Field evidence notes](../docs/FIELD_EVIDENCE.md).
+
