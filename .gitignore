@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+# Local configuration and secrets
+.env
+.env.*
+pin.txt
+evento.json
+calibracion.json
+impresion.json
+booth_bromas.json
+# Event photos and private assets
+fotos/
+originales/
+booth_bromas/
+*.log
+*.sqlite3
+*.db
+.DS_Store
