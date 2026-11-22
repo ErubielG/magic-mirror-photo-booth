@@ -4,7 +4,7 @@
 
 A secondhand lululemon Studio Mirror was repurposed into a self-service event photo booth. The system integrates a **Raspberry Pi 4**, **Sony IMX708 camera**, replacement **LVDS display controller**, an offline guest Wi-Fi network, and a bilingual browser-based interface.
 
-**Built under a fixed deadline:** software development took place remotely while the mirror hardware was in California. Physical integration, troubleshooting and commissioning were completed in the final days before a scheduled event. The system was deployed at a quinceañera on **November 14, 2026**, where guests used the capture and download workflow on their phones. Physical printing followed a separate, operator-assisted Canon app workflow.
+**Built under a fixed deadline:** software development took place remotely while the mirror hardware was in California. Physical integration, troubleshooting and commissioning were completed in the final days before a scheduled event. The system was deployed at a quinceañera on **November 14, 2026**, where guests used the capture and download workflow on their phones. Guests could request a printed 4×6-inch sheet containing up to four photos (one sheet per visit). The software supports automatic print dispatch, optional operator approval/rejection, and a separate manual fallback. The author reports that guest-requested printing operated during the event; the exact printer configuration used that night is not archived here.
 
 **Source:** [Full version 20 application (sanitized public derivative)](src/booth20.py) · [Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Field evidence](docs/FIELD_EVIDENCE.md)
 
@@ -18,13 +18,14 @@ A secondhand lululemon Studio Mirror was repurposed into a self-service event ph
 |:---:|:---:|
 | ![Real iPhone showing the photo-saving workflow](assets/gallery/ios-save-flow.jpg) | ![Real iPhone showing up to four photos per print sheet](assets/gallery/ios-print-selection.jpg) |
 
-*Photographs from real operation and device testing, shared with permission. They demonstrate the physical deployment, output-image composition and rendered mobile workflows. The total number of captures and completed prints will be added when verified from the Raspberry Pi and operator records.*
+*Photographs from real operation and device testing, shared with permission. The author recalls bringing approximately 30–40 sheets of photo paper and having no unused sheets left at the end of the event. This is an approximate physical-paper observation, **not** a verified count of successful printed sheets. Exact capture and print totals were not logged for this repository.*
 
 ## Engineering highlights
 
 - **Hardware reuse:** integrated a replacement LCD controller, camera, power conversion and existing smart-mirror display.
 - **Shared-resource control:** separated temporary mirror ownership from longer guest photo sessions so visitors could review photos without blocking the next capture.
 - **Mobile-first local networking:** QR onboarding, an offline access point, captive portal behavior and iOS-specific save workflows.
+- **Self-service print requests:** one 4×6-inch 2×2 sheet per guest visit, with up to four selected photos, a sequential print queue, unattended dispatch when configured, and optional operator approval.
 - **Operational delivery:** tested the integrated system, addressed hardware failures and deployed it for an actual event despite a short final integration window.
 
 The public source includes targeted security and camera-recovery changes made after the event. These changes are documented but **not yet verified on the physical Raspberry Pi**; the field-deployed build and public derivative should not be treated as identical.
@@ -35,7 +36,7 @@ The public source includes targeted security and camera-recovery changes made af
 - Local Wi-Fi/captive-portal experience and QR connection flow, with iOS and Android-specific workarounds
 - Separate guest visits and mirror ownership; 15 s inactivity release plus 20 s capture watchdog
 - Camera capture using `picamera2`/libcamera; real-time calibration and admin preview
-- 4×6-inch print sheet composition (vertical 2×2), manual Canon handoff and optional CUPS queue mode
+- 4×6-inch print sheet composition (vertical 2×2), sequential automatic CUPS printing when configured, optional approval/rejection and manual fallback
 - Admin panel for event settings, camera health, print queue, media and maintenance
 
 ## Architecture
@@ -51,8 +52,11 @@ flowchart LR
     LVDS -->|LVDS| PANEL[40-inch LCD panel]
     CAMERA[IMX708] -->|CSI-2 and I2C| PI
     PI -->|Wi-Fi AP and Flask| PHONES[Guest phones]
-    PHONES -->|Print sheet requests| QUEUE[Application queue]
-    QUEUE -.->|Operator action| CANON[Canon mobile app / SELPHY CP1500]
+    PHONES -->|One sheet per guest visit| QUEUE[Sequential print queue]
+    QUEUE -->|Automatic dispatch when enabled| CUPS[CUPS print service]
+    CUPS --> PRINTER[Configured printer]
+    ADMIN[Optional operator approval or rejection] -.-> QUEUE
+    QUEUE -.->|Manual fallback| CANON[Canon mobile app / SELPHY CP1500]
 ```
 
 ## Repository contents
@@ -88,7 +92,7 @@ The code contains distinct responsibilities—camera handling, session ownership
 
 ## How to interpret the field results
 
-The photographs document actual operation and visible outputs; the development tests provide complementary software-level verification. Observed event use is valuable field evidence without implying a precisely measured uptime percentage or print count. See the [photo gallery](assets/GALLERY.md), [deployment record](docs/DEPLOYMENT.md) and [testing methodology](docs/TESTING.md).
+The photographs document actual operation and visible outputs; the development tests provide complementary software-level verification. The author's recollection of approximately 30–40 photo sheets consumed contributes additional field context, but does not establish the exact number of successfully completed prints or an uptime percentage. See the [photo gallery](assets/GALLERY.md), [deployment record](docs/DEPLOYMENT.md) and [testing methodology](docs/TESTING.md).
 
 ## Development and verification
 
