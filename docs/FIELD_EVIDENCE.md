@@ -2,7 +2,7 @@
 
 ## Purpose
 
-These photographs were supplied as evidence of a working prototype and its use at an actual event, not as a benchmark or reliability certification. Publicly uploading files showing people requires their permission; for the event imagery, also consider the name of the celebrant and visible surroundings. No guest photos are committed in this update.
+Four selected, consent-cleared photographs are now published in [the gallery](../assets/GALLERY.md). The images document a working prototype at an event and in mobile-interface testing. The full private event photo archive remains excluded.
 
 ## Evidence matrix
 
@@ -25,9 +25,9 @@ The author's observation that guests used capture/download over the course of th
 
 The original development records describe 293 automated checks, rendering checks and a load simulation on a different machine. Those are development-verification evidence, not direct field-use measurements.
 
-## Future evidence to add
+## Further evidence to add
 
-- Consent-cleared photographs of the physical booth and interface, with metadata and identifying details reviewed
+- A close-up photograph of the internal hardware and connections, with any private details reviewed
 - A short video showing Wi-Fi connection, photo capture, guest gallery, and operator print handoff
 - Time range of event operation, clearly labeled as observed or derived from logs
 - Distinct capture count from retained JPEG files, avoiding double-counting original and composited copies
@@ -35,4 +35,4 @@ The original development records describe 293 automated checks, rendering checks
 
 ## Privacy
 
-An identifiable person in a supplied image is not authorization to publish that person's photo. Do not upload the supplied guest/event photos to this public repository unless appropriate permission is confirmed. Screenshots may also include participant names, QR connection credentials or local device data.
+The author confirmed permission to publish the selected images of themselves and their family. No Wi-Fi connection QR image was included in the approved public gallery. Future media additions should undergo the same permission and credential review.
