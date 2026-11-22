@@ -2,17 +2,32 @@
 
 **Python · Embedded Linux · Hardware integration · Raspberry Pi · LVDS · Local networking**
 
-A secondhand lululemon Studio Mirror was reverse-engineered and rebuilt into a self-service photo booth. A Raspberry Pi 4 (4 GB) manages the Sony IMX708 camera, local Wi-Fi access point, bilingual guest web interface, and the mirror kiosk; a replacement LVDS controller drives the original display.
+A secondhand lululemon Studio Mirror was repurposed into a self-service event photo booth. The system integrates a **Raspberry Pi 4**, **Sony IMX708 camera**, replacement **LVDS display controller**, an offline guest Wi-Fi network, and a bilingual browser-based interface.
 
-**Built for a real deadline:** software was developed remotely while the mirror was in another country; physical integration and troubleshooting happened in the final days before a scheduled event. The project was used at a California quinceañera on **November 14, 2026**. Guests captured and downloaded photos independently; physical printing used a separate operator-assisted Canon app workflow.
+**Built under a fixed deadline:** software development took place remotely while the mirror hardware was in California. Physical integration, troubleshooting and commissioning were completed in the final days before a scheduled event. The system was deployed at a quinceañera on **November 14, 2026**, where guests used the capture and download workflow on their phones. Physical printing followed a separate, operator-assisted Canon app workflow.
 
-**What was demonstrated:** hardware adaptation, browser-based control from guest phones, camera capture and framed-image output, session management, iOS captive-browser handling, print-sheet selection, and field operation in an event setting. See [field evidence and its limits](docs/FIELD_EVIDENCE.md).
+**Source:** [Full version 20 application (sanitized public derivative)](src/booth20.py) · [Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Field evidence](docs/FIELD_EVIDENCE.md)
 
-**What was not measured:** exact event uptime, total guest sessions, capture count and confirmed physical print count. These may be investigated using retained files and records; the photographs alone do not establish them.
+## Field deployment and mobile interface
 
-**Code now included:** [Full version 20 Python application — sanitized public derivative](src/booth20.py) (**~6,000 lines**). The original deployed file was provided in full and passed a Python syntax check. This derivative removes known embedded credentials and includes targeted changes explained below. **It has not been verified on the physical Raspberry Pi.**
+| Live event use | Captured image and event frame |
+|:---:|:---:|
+| ![Guest using the installed mirror at the event](assets/gallery/event-field-use.jpg) | ![Photo captured and composed by the booth](assets/gallery/event-photo-output.jpg) |
 
+| iPhone photo-saving interface | iPhone print-sheet selection |
+|:---:|:---:|
+| ![Real iPhone showing the photo-saving workflow](assets/gallery/ios-save-flow.jpg) | ![Real iPhone showing up to four photos per print sheet](assets/gallery/ios-print-selection.jpg) |
 
+*Photographs from real operation and device testing, shared with permission. They demonstrate the physical deployment, output-image composition and rendered mobile workflows. The total number of captures and completed prints will be added when verified from the Raspberry Pi and operator records.*
+
+## Engineering highlights
+
+- **Hardware reuse:** integrated a replacement LCD controller, camera, power conversion and existing smart-mirror display.
+- **Shared-resource control:** separated temporary mirror ownership from longer guest photo sessions so visitors could review photos without blocking the next capture.
+- **Mobile-first local networking:** QR onboarding, an offline access point, captive portal behavior and iOS-specific save workflows.
+- **Operational delivery:** tested the integrated system, addressed hardware failures and deployed it for an actual event despite a short final integration window.
+
+The public source includes targeted security and camera-recovery changes made after the event. These changes are documented but **not yet verified on the physical Raspberry Pi**; the field-deployed build and public derivative should not be treated as identical.
 
 ## Features
 
@@ -48,7 +63,8 @@ magic-mirror-photo-booth/
 ├── docs/                       # architecture, hardware, testing, deployment, security
 ├── tests/                      # static review tests (not the original 293 checks)
 ├── tools/photo_inventory.py    # read-only photo inventory utility
-├── assets/README.md            # safe media upload guidance
+├── assets/gallery/              # four approved event/UI photographs
+├── assets/GALLERY.md           # visual-evidence captions and context
 ├── .gitignore                  # excludes credentials and private event media
 └── PUBLISHING_CHECKLIST.md
 ```
@@ -70,14 +86,9 @@ The 6,000-line Python application is a **monolithic implementation**, not a reco
 
 The code contains distinct responsibilities—camera handling, session ownership, local networking, print composition, administrative controls and embedded browser templates—but they are not cleanly isolated as deployable modules. See [engineering trade-offs](docs/ENGINEERING_DECISIONS.md) for the rationale, consequences and modularization plan.
 
-## Field evidence
+## How to interpret the field results
 
-- **Finished image samples:** demonstrate camera capture and event-caption compositing, not uptime or total throughput.
-- **Guest photographed at the live event:** documents real-world use of the mirror outside a development setting.
-- **Mirror running in the enclosure:** shows physical kiosk integration; QR code and location details must be reviewed before publication.
-- **iPhone captive browser viewer and print-sheet dialog:** demonstrate the mobile UI and handoff screens on actual iOS hardware, not confirmed paper output.
-
-Identifiable guest photographs and event details are **not included** until permission and privacy review are complete. [Evidence map](docs/FIELD_EVIDENCE.md).
+The photographs document actual operation and visible outputs; the development tests provide complementary software-level verification. Observed event use is valuable field evidence without implying a precisely measured uptime percentage or print count. See the [photo gallery](assets/GALLERY.md), [deployment record](docs/DEPLOYMENT.md) and [testing methodology](docs/TESTING.md).
 
 ## Development and verification
 
@@ -98,11 +109,11 @@ See [running and configuration notes](docs/RUNNING.md) before executing.
 - [Architecture](docs/ARCHITECTURE.md) · [Hardware](docs/HARDWARE.md) · [Session model](docs/SESSION_MODEL.md)
 - [Source review](docs/BOOTH20_SOURCE_REVIEW.md) · [Testing](docs/TESTING.md) · [Deployment](docs/DEPLOYMENT.md)
 - [Event metrics recovery](docs/EVENT_DATA_RECOVERY.md) · [Results](docs/RESULTS.md) · [Security](docs/SECURITY.md)
-- [Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Field evidence](docs/FIELD_EVIDENCE.md) · [Roadmap](docs/ROADMAP.md)
+- [Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Field evidence](docs/FIELD_EVIDENCE.md) · [Photo gallery](assets/GALLERY.md) · [Roadmap](docs/ROADMAP.md)
 - [Source README](src/README.md) · [Publishing checklist](PUBLISHING_CHECKLIST.md)
 
 ## Author
 
 Jesús Erubiel Borboa García · Mechatronics Engineering, Universidad Politécnica de Sinaloa (UPSIN), Mexico.
 
-No open-source license selected yet. Deployment configurations, captured guest photos, secrets and event data are not included.
+No open-source license selected yet. Private runtime configurations, credentials and the full event photo archive are not included; the four approved gallery images are published above.
