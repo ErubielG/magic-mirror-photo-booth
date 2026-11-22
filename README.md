@@ -2,11 +2,17 @@
 
 **Python · Embedded Linux · Hardware integration · Raspberry Pi · LVDS · Local networking**
 
-A secondhand lululemon Studio Mirror was rebuilt as a browser-controlled photo booth. The factory LVDS display controller was replaced and a Raspberry Pi 4 (4 GB) manages the IMX708 camera, local access point, guest web app and mirror kiosk.
+A secondhand lululemon Studio Mirror was reverse-engineered and rebuilt into a self-service photo booth. A Raspberry Pi 4 (4 GB) manages the Sony IMX708 camera, local Wi-Fi access point, bilingual guest web interface, and the mirror kiosk; a replacement LVDS controller drives the original display.
+
+**Built for a real deadline:** software was developed remotely while the mirror was in another country; physical integration and troubleshooting happened in the final days before a scheduled event. The project was used at a California quinceañera on **November 14, 2026**. Guests captured and downloaded photos independently; physical printing used a separate operator-assisted Canon app workflow.
+
+**What was demonstrated:** hardware adaptation, browser-based control from guest phones, camera capture and framed-image output, session management, iOS captive-browser handling, print-sheet selection, and field operation in an event setting. See [field evidence and its limits](docs/FIELD_EVIDENCE.md).
+
+**What was not measured:** exact event uptime, total guest sessions, capture count and confirmed physical print count. These may be investigated using retained files and records; the photographs alone do not establish them.
 
 **Code now included:** [Full version 20 Python application — sanitized public derivative](src/booth20.py) (**~6,000 lines**). The original deployed file was provided in full and passed a Python syntax check. This derivative removes known embedded credentials and includes targeted changes explained below. **It has not been verified on the physical Raspberry Pi.**
 
-The booth was used at a quinceañera in California on **November 14, 2026**. Guests captured/downloaded photos without an operator for that part of the flow. **Physical printing was a separate, operator-assisted Canon app step.** Event statistics are pending reconciliation from saved files and available operator records.
+
 
 ## Features
 
@@ -58,6 +64,21 @@ This project includes a **public code variant**, not an exact-byte copy of the f
 
 See [full-source review](docs/BOOTH20_SOURCE_REVIEW.md) and [security notes](docs/SECURITY.md). **Changes remain untested on the physical booth; back up the deployed version before testing.**
 
+## Engineering decisions under deadline
+
+The 6,000-line Python application is a **monolithic implementation**, not a recommended final product architecture. Keeping a known-working, integrated program during final on-site commissioning reduced the immediate risks of a major refactor with limited access to the physical hardware. This is a **contextual engineering trade-off**, not evidence that modularity is unnecessary.
+
+The code contains distinct responsibilities—camera handling, session ownership, local networking, print composition, administrative controls and embedded browser templates—but they are not cleanly isolated as deployable modules. See [engineering trade-offs](docs/ENGINEERING_DECISIONS.md) for the rationale, consequences and modularization plan.
+
+## Field evidence
+
+- **Finished image samples:** demonstrate camera capture and event-caption compositing, not uptime or total throughput.
+- **Guest photographed at the live event:** documents real-world use of the mirror outside a development setting.
+- **Mirror running in the enclosure:** shows physical kiosk integration; QR code and location details must be reviewed before publication.
+- **iPhone captive browser viewer and print-sheet dialog:** demonstrate the mobile UI and handoff screens on actual iOS hardware, not confirmed paper output.
+
+Identifiable guest photographs and event details are **not included** until permission and privacy review are complete. [Evidence map](docs/FIELD_EVIDENCE.md).
+
 ## Development and verification
 
 The engineering portfolio reports 293 automated checks and a 12-second, 50-client simulation on a development machine, *not* the Raspberry Pi. The original 293-check test harness was not included in the upload and has **not** been rerun. The public Python source has been syntax-checked here.
@@ -77,7 +98,8 @@ See [running and configuration notes](docs/RUNNING.md) before executing.
 - [Architecture](docs/ARCHITECTURE.md) · [Hardware](docs/HARDWARE.md) · [Session model](docs/SESSION_MODEL.md)
 - [Source review](docs/BOOTH20_SOURCE_REVIEW.md) · [Testing](docs/TESTING.md) · [Deployment](docs/DEPLOYMENT.md)
 - [Event metrics recovery](docs/EVENT_DATA_RECOVERY.md) · [Results](docs/RESULTS.md) · [Security](docs/SECURITY.md)
-- [Roadmap](docs/ROADMAP.md) · [Source README](src/README.md) · [Publishing checklist](PUBLISHING_CHECKLIST.md)
+- [Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Field evidence](docs/FIELD_EVIDENCE.md) · [Roadmap](docs/ROADMAP.md)
+- [Source README](src/README.md) · [Publishing checklist](PUBLISHING_CHECKLIST.md)
 
 ## Author
 
