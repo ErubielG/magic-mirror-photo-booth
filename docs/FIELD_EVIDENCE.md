@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Four selected, consent-cleared photographs are now published in [the gallery](../assets/GALLERY.md). The images document a working prototype at an event and in mobile-interface testing. The full private event photo archive remains excluded.
+Four selected, consent-cleared photographs are now published in [the gallery](../assets/GALLERY.md). The images document a working prototype at an event and in mobile-interface testing. The full private event photo archive remains excluded. Separately from the photographs, the author reports guest-requested printing during the event and approximate depletion of 30–40 sheets of photo paper; this is an eyewitness paper-stock estimate rather than a printer-confirmed sheet count.
 
 ## Evidence matrix
 
@@ -28,7 +28,7 @@ The original development records describe 293 automated checks, rendering checks
 ## Further evidence to add
 
 - A close-up photograph of the internal hardware and connections, with any private details reviewed
-- A short video showing Wi-Fi connection, photo capture, guest gallery, and operator print handoff
+- A short video showing Wi-Fi connection, photo capture, guest gallery, and the automatic print request/output path (plus optional approval mode)
 - Time range of event operation, clearly labeled as observed or derived from logs
 - Distinct capture count from retained JPEG files, avoiding double-counting original and composited copies
 - Print requests and physically completed print sheets, recorded as separate metrics
