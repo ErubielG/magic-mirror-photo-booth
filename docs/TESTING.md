@@ -4,4 +4,4 @@ The author's engineering portfolio reports **293 automated checks** against mock
 
 These numbers are reported historical development results, **not** benchmarks measured on the Raspberry Pi. The original 293-check harness was not provided and is not included in this repository. The tests in `tests/` are separate lightweight static checks and do not reproduce the original test suite.
 
-Before deployment, test camera initialization/recovery, guest session isolation, iOS Safari handoff, Wi-Fi captive portal, physical print handoff and disconnected power/restore behavior on the actual Raspberry Pi.
+Before deploying the post-event public derivative, test camera initialization/recovery, guest session isolation, iOS Safari handoff, Wi-Fi captive portal, automatic CUPS dispatch, approval/rejection mode, physical print confirmation, manual fallback, and disconnected power/restore behavior on the actual Raspberry Pi.
