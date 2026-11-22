@@ -1,14 +1,14 @@
 # Field photo gallery
 
-This folder is reserved for four photographs from the November 14, 2026 Magic Mirror event and iPhone integration tests. The author confirms that all people shown approved portfolio publication.
+The following four approved, web-optimized photographs are included in this folder:
 
-The photos have been prepared outside the repository as web-sized JPGs with EXIF metadata removed. Upload the following files here (not the containing ZIP):
+| File | Purpose |
+|---|---|
+| [event-field-use.jpg](event-field-use.jpg) | Mirror used during the live event |
+| [event-photo-output.jpg](event-photo-output.jpg) | Captured output with event banner |
+| [ios-save-flow.jpg](ios-save-flow.jpg) | iPhone captive-browser saving interface |
+| [ios-print-selection.jpg](ios-print-selection.jpg) | iPhone print-sheet selection interface |
 
-- `event-field-use.jpg` — physical mirror being used during the event
-- `event-photo-output.jpg` — final framed photo produced by the booth
-- `ios-save-flow.jpg` — iOS captive-browser photo-saving interface
-- `ios-print-selection.jpg` — iOS print-sheet selection interface
+People shown approved portfolio publication. The original preparation photo with a Wi-Fi QR code was excluded.
 
-The preparation image containing a Wi-Fi QR code was excluded. These photographs show deployment and UI behavior, not exact uptime or completed print counts.
-
-See [gallery plan](../GALLERY.md) and [field-evidence analysis](../../docs/FIELD_EVIDENCE.md).
+See the [main README](../../README.md) for the illustrated gallery and [field evidence](../../docs/FIELD_EVIDENCE.md) for interpretation.
