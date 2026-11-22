@@ -18,7 +18,7 @@ A major refactor in the final days before the event could have introduced unveri
 2. Keep photo capture and retrieval usable for event guests with no app installation.
 3. Separate short mirror ownership from longer-lived guest galleries to avoid unnecessary queueing.
 4. Provide practical workarounds for mobile captive-portal behavior.
-5. Support a separate operator-assisted physical print process.
+5. Support autonomous guest-initiated printing: one vertical 4×6-inch sheet containing up to four images per session, serial print dispatch, optional operator approval/rejection, and a separate manual fallback when required by the printer setup.
 6. Recover from the sensor failure discovered during on-site commissioning and meet the event date.
 
 ## Known technical debt and lessons
