@@ -16,6 +16,6 @@ Confirmed source functionality includes Flask templates for kiosk, phone and adm
 - Camera construction/start is still module scoped, so loss of the camera can block web startup.
 - In-memory queue, visits and pickup counter are not durable over restart.
 - The source supports unattended printing through a configured CUPS queue when operator approval and manual mode are disabled. In manual print mode, approval marks a sheet ready for separate physical printing; neither that status nor a successful `lp` call alone proves a sheet was physically delivered.
-- The exact event-night printer configuration was not included with the published source; the author reports physical printing in operation and approximate paper-stock depletion.
+- At the event, booth20 operated with manual printing and per-sheet approval disabled. The Raspberry Pi submitted sheets using Linux CUPS (`lp -d selphy`) over the PhotoBooth Wi-Fi network to the connected Canon SELPHY CP1500. No operator phone or manual print approval was involved. Reported paper depletion is approximate, not a print-total metric.
 - Device-level security and end-to-end behavior need testing on actual hardware.
 - The originally reported 293 tests were not included or rerun.
