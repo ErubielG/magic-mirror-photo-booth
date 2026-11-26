@@ -10,7 +10,7 @@ This created a different risk profile from a product developed over a long roadm
 
 The version 20 application contains roughly 6,000 lines, including Python logic and embedded HTML/CSS/JavaScript templates. It is monolithic. This increases coupling, complicates testing, and makes later changes harder to reason about.
 
-A major refactor in the final days before the event could have introduced unverified regressions across the camera, Flask service, captive portal, guest sessions, printing, and kiosk display. Preserving the integrated, tested implementation was a pragmatic **short-term risk decision**, not an endorsement of the architecture as ideal.
+A major refactor in the final days before the event could have introduced unverified regressions across the camera, Flask service, captive portal, guest sessions, printing, and kiosk display. Keeping the integrated system intact while installing a rapid booth20 update during setup and arrival of the first guests was a pragmatic **short-term risk decision**, not an endorsement of the architecture as ideal.
 
 ## What was prioritized
 
@@ -18,7 +18,7 @@ A major refactor in the final days before the event could have introduced unveri
 2. Keep photo capture and retrieval usable for event guests with no app installation.
 3. Separate short mirror ownership from longer-lived guest galleries to avoid unnecessary queueing.
 4. Provide practical workarounds for mobile captive-portal behavior.
-5. Support autonomous guest-initiated printing: one vertical 4×6-inch sheet containing up to four images per session, serial print dispatch, optional operator approval/rejection, and a separate manual fallback when required by the printer setup.
+5. Support unattended guest-initiated printing: one vertical 4×6-inch sheet containing up to four images per visit, session validation, serialized print jobs and CUPS (`lp -d selphy`) direct dispatch to the Canon SELPHY CP1500 on PhotoBooth Wi-Fi. Optional approval/manual alternatives exist, but were disabled at the event.
 6. Recover from the sensor failure discovered during on-site commissioning and meet the event date.
 
 ## Known technical debt and lessons
