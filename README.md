@@ -4,7 +4,7 @@
 
 A secondhand lululemon Studio Mirror was repurposed into a self-service event photo booth. The system integrates a **Raspberry Pi 4**, **Sony IMX708 camera**, replacement **LVDS display controller**, an offline guest Wi-Fi network, and a bilingual browser-based interface.
 
-**Built under a fixed deadline:** software development took place remotely while the mirror hardware was in California. Physical integration, troubleshooting and commissioning were completed in the final days before a scheduled event. The system was deployed at a quinceañera on **November 14, 2026**, where guests used the capture and download workflow on their phones. Guests could request a printed 4×6-inch sheet containing up to four photos (one sheet per visit). The software supports automatic print dispatch, optional operator approval/rejection, and a separate manual fallback. The author reports that guest-requested printing operated during the event; the exact printer configuration used that night is not archived here.
+**Built under a fixed deadline:** software development took place remotely while the mirror hardware was in California. Physical integration, troubleshooting and commissioning were completed in the final days before a scheduled event. The system was deployed at a quinceañera on **November 14, 2026**, where guests used the capture and download workflow on their phones. Guests could request a printed 4×6-inch sheet containing up to four photos (one sheet per visit). During setup and as the first guests arrived, **booth20 was installed as a rapid update to booth19**. The updated system operated for the remainder of the event without operator intervention. Guests requested prints themselves; the Raspberry Pi composed each sheet and sent it directly over the PhotoBooth Wi-Fi network to a **Canon SELPHY CP1500** using Linux CUPS (`lp -d selphy`). The printer had been connected to the booth's Wi-Fi beforehand. The optional manual and approval modes were not used at this event.
 
 **Source:** [Full version 20 application (sanitized public derivative)](src/booth20.py) · [Engineering decisions](docs/ENGINEERING_DECISIONS.md) · [Field evidence](docs/FIELD_EVIDENCE.md)
 
@@ -25,8 +25,8 @@ A secondhand lululemon Studio Mirror was repurposed into a self-service event ph
 - **Hardware reuse:** integrated a replacement LCD controller, camera, power conversion and existing smart-mirror display.
 - **Shared-resource control:** separated temporary mirror ownership from longer guest photo sessions so visitors could review photos without blocking the next capture.
 - **Mobile-first local networking:** QR onboarding, an offline access point, captive portal behavior and iOS-specific save workflows.
-- **Self-service print requests:** one 4×6-inch 2×2 sheet per guest visit, with up to four selected photos, a sequential print queue, unattended dispatch when configured, and optional operator approval.
-- **Operational delivery:** tested the integrated system, addressed hardware failures and deployed it for an actual event despite a short final integration window.
+- **Autonomous capture-to-print workflow:** guests selected up to four photographs per 4×6-inch sheet; the booth validated each request, composed and queued the sheet, and printed directly via CUPS (`lp -d selphy`) to the Wi-Fi-connected Canon SELPHY CP1500, without manual approval during the event.
+- **Live operation and rapid update:** installed booth20 over booth19 during event setup as the first guests arrived; the integrated system continued running without operator intervention for the remainder of the evening.
 
 The public source includes targeted security and camera-recovery changes made after the event. These changes are documented but **not yet verified on the physical Raspberry Pi**; the field-deployed build and public derivative should not be treated as identical.
 
@@ -36,7 +36,7 @@ The public source includes targeted security and camera-recovery changes made af
 - Local Wi-Fi/captive-portal experience and QR connection flow, with iOS and Android-specific workarounds
 - Separate guest visits and mirror ownership; 15 s inactivity release plus 20 s capture watchdog
 - Camera capture using `picamera2`/libcamera; real-time calibration and admin preview
-- 4×6-inch print sheet composition (vertical 2×2), sequential automatic CUPS printing when configured, optional approval/rejection and manual fallback
+- 4×6-inch vertical (2×2) print-sheet composition, sequential CUPS printing through `lp -d selphy`, optional approval/rejection and manual fallback (not used during the event)
 - Admin panel for event settings, camera health, print queue, media and maintenance
 
 ## Architecture
@@ -52,11 +52,10 @@ flowchart LR
     LVDS -->|LVDS| PANEL[40-inch LCD panel]
     CAMERA[IMX708] -->|CSI-2 and I2C| PI
     PI -->|Wi-Fi AP and Flask| PHONES[Guest phones]
-    PHONES -->|One sheet per guest visit| QUEUE[Sequential print queue]
-    QUEUE -->|Automatic dispatch when enabled| CUPS[CUPS print service]
-    CUPS --> PRINTER[Configured printer]
-    ADMIN[Optional operator approval or rejection] -.-> QUEUE
-    QUEUE -.->|Manual fallback| CANON[Canon mobile app / SELPHY CP1500]
+    PHONES -->|Request one sheet per visit| QUEUE[Compose 4x6 sheet and queue]
+    QUEUE -->|Automatic mode, no approval| CUPS[CUPS lp -d selphy]
+    CUPS -->|PhotoBooth Wi-Fi| PRINTER[Canon SELPHY CP1500]
+    ADMIN[Optional approval / manual mode: unused at event] -.-> QUEUE
 ```
 
 ## Repository contents
@@ -98,7 +97,7 @@ The photographs document actual operation and visible outputs; the development t
 
 The engineering portfolio reports 293 automated checks and a 12-second, 50-client simulation on a development machine, *not* the Raspberry Pi. The original 293-check test harness was not included in the upload and has **not** been rerun. The public Python source has been syntax-checked here.
 
-The photo capture, printing, hardware recovery, real Wi-Fi portal and true simultaneous client behavior require validation on an actual Raspberry Pi.
+The live event demonstrated photo capture, local guest workflows and unattended direct printing on the physical booth. The publicly published sanitized derivative includes post-event changes that still require independent device-level regression testing; the 293 original development checks and the simulated 50-client load test are not equivalent to measured production uptime or field concurrency.
 
 ## Hardware and installation
 
