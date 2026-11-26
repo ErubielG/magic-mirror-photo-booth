@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Four selected, consent-cleared photographs are now published in [the gallery](../assets/GALLERY.md). The images document a working prototype at an event and in mobile-interface testing. The full private event photo archive remains excluded. Separately from the photographs, the author reports guest-requested printing during the event and approximate depletion of 30–40 sheets of photo paper; this is an eyewitness paper-stock estimate rather than a printer-confirmed sheet count.
+Four selected, consent-cleared photographs are now published in [the gallery](../assets/GALLERY.md). The images document a working prototype at an event and in mobile-interface testing. The full private event photo archive remains excluded. Separately from the photographs, the live event account records autonomous guest-requested printing: booth20 sent completed 4×6-inch sheets via CUPS (`lp -d selphy`) over the PhotoBooth Wi-Fi network to a Canon SELPHY CP1500 without manual approval or phone-based intervention. Approximate depletion of 30–40 photo sheets is an observational estimate, not a printer-confirmed successful print count.
 
 ## Evidence matrix
 
@@ -28,7 +28,7 @@ The original development records describe 293 automated checks, rendering checks
 ## Further evidence to add
 
 - A close-up photograph of the internal hardware and connections, with any private details reviewed
-- A short video showing Wi-Fi connection, photo capture, guest gallery, and the automatic print request/output path (plus optional approval mode)
+- A short video showing Wi-Fi connection, photo capture, guest gallery, and direct automatic CUPS printing to the CP1500; distinguish optional approval/manual modes from the event configuration
 - Time range of event operation, clearly labeled as observed or derived from logs
 - Distinct capture count from retained JPEG files, avoiding double-counting original and composited copies
 - Print requests and physically completed print sheets, recorded as separate metrics
